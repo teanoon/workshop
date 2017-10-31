@@ -1,0 +1,5 @@
+spring:
+    jpa.hibernate.ddl-auto: validate
+    datasource:
+        url: jdbc:mysql://mysql/research?useSSL=false
+        username: root

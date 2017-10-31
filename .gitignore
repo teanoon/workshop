@@ -1,0 +1,8 @@
+.zsh_history
+.idea/
+*.iml
+.IdeaIC.java/
+.IdeaIC2017.1/
+.gradle/
+build/
+db/mysql
