@@ -1,8 +1,9 @@
 package com.example.research.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Website {
@@ -10,13 +11,25 @@ public class Website {
     @Id
     @GeneratedValue
     private Long id;
-    private Integer rank;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Rank> ranks = new ArrayList<>();
     private String domain;
     private String title;
     private String description;
     private String keywords;
     private String icp;
+
+    private Date created;
+    private Date lastModified;
+
+    @PrePersist
+    public void setDateBeforeSave() {
+        if (created == null) {
+            created = new Date();
+        }
+        lastModified = new Date();
+    }
 
     public Long getId() {
         return id;
@@ -26,12 +39,18 @@ public class Website {
         this.id = id;
     }
 
-    public Integer getRank() {
-        return rank;
+    public List<Rank> getRanks() {
+        return ranks;
     }
 
-    public void setRank(Integer rank) {
-        this.rank = rank;
+    public void setRanks(List<Rank> ranks) {
+        this.ranks = ranks;
+    }
+
+    public void addRank(Integer rankValue) {
+        Rank rank = new Rank();
+        rank.setValue(rankValue);
+        ranks.add(rank);
     }
 
     public String getDomain() {
@@ -74,17 +93,20 @@ public class Website {
         this.icp = icp;
     }
 
-    @Override
-    public String toString() {
-        return "Website{" +
-                "id=" + id +
-                ", rank=" + rank +
-                ", domain='" + domain + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", keywords='" + keywords + '\'' +
-                ", icp='" + icp + '\'' +
-                '}';
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
     }
 
 }

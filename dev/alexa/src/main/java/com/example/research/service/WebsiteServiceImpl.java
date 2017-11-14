@@ -17,6 +17,11 @@ final class WebsiteServiceImpl implements WebsiteService {
     }
 
     @Override
+    public Website findByDomain(String domain) {
+        return repo.findByDomain(domain);
+    }
+
+    @Override
     public Website upsert(Website website) {
         Website old = repo.findByDomain(website.getDomain());
         if (old != null) {
