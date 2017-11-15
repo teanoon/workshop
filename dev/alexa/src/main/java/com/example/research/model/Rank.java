@@ -4,16 +4,17 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-class Rank {
+public class Rank {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "website_id")
     private Website website;
-    private Integer value;
 
+    private Integer value;
     private Date created;
 
     @PrePersist

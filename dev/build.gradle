@@ -7,6 +7,15 @@ buildscript {
     }
 }
 
+plugins {
+    id "org.flywaydb.flyway" version "4.2.0"
+}
+
+flyway {
+    url = 'jdbc:mysql://localhost/research?useSSL=false'
+    user = 'root'
+}
+
 allprojects {
     group = "com.example.research"
 
