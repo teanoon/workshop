@@ -12,7 +12,7 @@ public class Website {
     @GeneratedValue
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "website")
     private List<Rank> ranks = new ArrayList<>();
     private String domain;
     private String title;
@@ -47,9 +47,7 @@ public class Website {
         this.ranks = ranks;
     }
 
-    public void addRank(Integer rankValue) {
-        Rank rank = new Rank();
-        rank.setValue(rankValue);
+    public void addRank(Rank rank) {
         ranks.add(rank);
     }
 
